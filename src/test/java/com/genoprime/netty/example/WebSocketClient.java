@@ -33,7 +33,7 @@ public class WebSocketClient {
     }
 
     public void open() throws Exception {
-        Bootstrap b = new Bootstrap();
+        Bootstrap bootstrap = new Bootstrap();
         String protocol = uri.getScheme();
         if (!"ws".equals(protocol)) {
             throw new IllegalArgumentException("Unsupported protocol: " + protocol);
@@ -47,7 +47,7 @@ public class WebSocketClient {
                         WebSocketClientHandshakerFactory.newHandshaker(
                                 uri, WebSocketVersion.V13, null, false, HttpHeaders.EMPTY_HEADERS, 1280000));
 
-        b.group(group)
+        bootstrap.group(group)
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
@@ -60,7 +60,7 @@ public class WebSocketClient {
                 });
 
         //System.out.println("WebSocket Client connecting");
-        ch = b.connect(uri.getHost(), uri.getPort()).sync().channel();
+        ch = bootstrap.connect(uri.getHost(), uri.getPort()).sync().channel();
         handler.handshakeFuture().sync();
     }
 

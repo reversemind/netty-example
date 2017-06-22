@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author Stephen Mallette (http://stephen.genoprime.com)
  */
 public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> {
+
     private static final Logger logger = LoggerFactory.getLogger(WebSocketClientHandler.class);
 
     private final WebSocketClientHandshaker handshaker;
@@ -51,6 +52,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         final Channel ch = ctx.channel();
+
         if (!handshaker.isHandshakeComplete()) {
             // web socket client connected
             handshaker.finishHandshake(ch, (FullHttpResponse) msg);
@@ -70,11 +72,12 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
             // uncomment to print request
             // logger.info(textFrame.text());
         } else if (frame instanceof PongWebSocketFrame) {
+
         } else if (frame instanceof CloseWebSocketFrame)
             ch.close();
         else if (frame instanceof BinaryWebSocketFrame) {
             // uncomment to print request
-            // logger.info(frame.content().toString());
+             logger.info(frame.content().toString());
         }
 
     }
