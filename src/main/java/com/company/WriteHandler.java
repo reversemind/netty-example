@@ -26,8 +26,6 @@ import io.netty.channel.ChannelHandler;
 @SuppressWarnings({ "StringConcatenationInsideStringBufferAppend", "StringBufferReplaceableByString" })
 public class WriteHandler extends ChannelDuplexHandler {
 
-    private static final LogLevel DEFAULT_LEVEL = LogLevel.DEBUG;
-
     /**
      * Creates a new instance whose logger name is the fully qualified class
      * name of the instance with hex dump enabled.

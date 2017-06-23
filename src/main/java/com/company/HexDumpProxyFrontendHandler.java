@@ -9,6 +9,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelOption;
+import io.netty.util.ReferenceCountUtil;
 
 public class HexDumpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
 
